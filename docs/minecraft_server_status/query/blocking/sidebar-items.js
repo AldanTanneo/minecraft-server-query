@@ -1,0 +1,1 @@
+initSidebarItems({"fn":[["query","Convenience function to get a full status packet on the client socket."]],"struct":[["QueryClient","A blocking Query client using the [`std`] networking primitives."]]});
