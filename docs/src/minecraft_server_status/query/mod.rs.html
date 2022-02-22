@@ -399,6 +399,8 @@
 <span id="394">394</span>
 <span id="395">395</span>
 <span id="396">396</span>
+<span id="397">397</span>
+<span id="398">398</span>
 </pre><pre class="rust"><code><span class="doccomment">//! Implementation of the Minecraft server [Query UDP protocol](https://wiki.vg/Query)</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! The [`blocking`] and [`async`](self::tokio) [versions](self::async_std) have</span>
@@ -470,12 +472,6 @@
 
 <span class="doccomment">/// Header size, in bytes</span>
 <span class="kw">const</span> <span class="ident">RESPONSE_HEADER_SIZE</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="ident">std::mem::size_of</span>::<span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>() <span class="op">+</span> <span class="ident">std::mem::size_of</span>::<span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>();
-<span class="doccomment">/// Handshake response max size, in bytes</span>
-<span class="kw">const</span> <span class="ident">HANDSHAKE_RESPONSE_SIZE</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="number">16</span>;
-<span class="doccomment">/// Basic stat response max size, in bytes</span>
-<span class="kw">const</span> <span class="ident">BASIC_STAT_RESPONSE_SIZE</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="number">512</span>;
-<span class="doccomment">/// Full stat response max size, in bytes</span>
-<span class="kw">const</span> <span class="ident">FULL_STAT_RESPONSE_SIZE</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="number">1472</span>;
 
 <span class="doccomment">/// Returns an IO error with error kind set to `Other`</span>
 <span class="attribute">#[<span class="ident">inline</span>]</span>
@@ -556,6 +552,9 @@
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Token</span>(<span class="kw">pub</span> <span class="ident">u32</span>);
 
 <span class="kw">impl</span> <span class="ident">Token</span> {
+    <span class="doccomment">/// Handshake response max size, in bytes</span>
+    <span class="kw">const</span> <span class="ident">RESPONSE_SIZE</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="number">16</span>;
+
     <span class="doccomment">/// Parse a token from a UDP payload, discarding the terminating null byte.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// ```rust</span>
@@ -598,6 +597,9 @@
 }
 
 <span class="kw">impl</span> <span class="ident">BasicStat</span> {
+    <span class="doccomment">/// Basic stat response max size, in bytes</span>
+    <span class="kw">const</span> <span class="ident">RESPONSE_SIZE</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="number">512</span>;
+
     <span class="doccomment">/// Parse a basic stat struct from a UDP payload. Fails if fields are</span>
     <span class="doccomment">/// missing, returning an IO error for missing data</span>
     <span class="doccomment">///</span>
@@ -676,6 +678,8 @@
 }
 
 <span class="kw">impl</span> <span class="ident">FullStat</span> {
+    <span class="doccomment">/// Full stat response max size, in bytes</span>
+    <span class="kw">const</span> <span class="ident">RESPONSE_SIZE</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="number">1472</span>;
     <span class="doccomment">/// Padding at the start of the payload</span>
     <span class="kw">const</span> <span class="ident">PADDING_START_SIZE</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="number">11</span>;
     <span class="doccomment">/// Padding in the middle of the payload, between the KV and players sections</span>
