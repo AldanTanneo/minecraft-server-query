@@ -1,7 +1,12 @@
 [package]
 name = "minecraft-server-status"
+description = "A Rust library for getting Minecraft server status."
 version = "0.1.0"
 authors = ["AldanTanneo <aldantanneo@gmail.com>"]
+documentation = "https://aldantanneo.github.io/minecraft-server-status"
+homepage = "https://github.com/AldanTanneo/minecraft-server-status"
+keywords = ["minecraft", "query", "server", "ping", "status", "udp"]
+license = "MIT"
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
