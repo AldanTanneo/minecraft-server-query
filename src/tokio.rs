@@ -168,14 +168,14 @@ mod tests {
         let token = client.handshake().await.unwrap();
 
         let basic_stat = client.basic_stat(token).await.unwrap();
-        assert_eq!(basic_stat.hostport, crate::query::DEFAULT_PORT);
+        assert_eq!(basic_stat.hostport, crate::DEFAULT_PORT);
     }
 
     #[tokio::test]
     async fn test_full_stat() {
         let full_stat = super::query(TEST_IP).await.unwrap();
 
-        assert_eq!(full_stat.hostport, crate::query::DEFAULT_PORT);
+        assert_eq!(full_stat.hostport, crate::DEFAULT_PORT);
         assert_eq!(full_stat.numplayers as usize, full_stat.player_list.len());
         assert_eq!(full_stat.version, "1.7.10");
         assert_eq!(full_stat.game_id, "MINECRAFT");
