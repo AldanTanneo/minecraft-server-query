@@ -69,12 +69,6 @@ pub const DEFAULT_TIMEOUT: Duration = Duration::from_millis(500);
 
 /// Header size, in bytes
 const RESPONSE_HEADER_SIZE: usize = std::mem::size_of::<u8>() + std::mem::size_of::<u32>();
-/// Handshake response max size, in bytes
-const HANDSHAKE_RESPONSE_SIZE: usize = 16;
-/// Basic stat response max size, in bytes
-const BASIC_STAT_RESPONSE_SIZE: usize = 512;
-/// Full stat response max size, in bytes
-const FULL_STAT_RESPONSE_SIZE: usize = 1472;
 
 /// Returns an IO error with error kind set to `Other`
 #[inline]
@@ -155,6 +149,9 @@ fn pairs<T, I: Iterator<Item = T>>(iter: I) -> impl Iterator<Item = (T, T)> {
 pub struct Token(pub u32);
 
 impl Token {
+    /// Handshake response max size, in bytes
+    const RESPONSE_SIZE: usize = 16;
+
     /// Parse a token from a UDP payload, discarding the terminating null byte.
     ///
     /// ```rust
@@ -197,6 +194,9 @@ pub struct BasicStat {
 }
 
 impl BasicStat {
+    /// Basic stat response max size, in bytes
+    const RESPONSE_SIZE: usize = 512;
+
     /// Parse a basic stat struct from a UDP payload. Fails if fields are
     /// missing, returning an IO error for missing data
     ///
@@ -275,6 +275,8 @@ pub struct FullStat {
 }
 
 impl FullStat {
+    /// Full stat response max size, in bytes
+    const RESPONSE_SIZE: usize = 1472;
     /// Padding at the start of the payload
     const PADDING_START_SIZE: usize = 11;
     /// Padding in the middle of the payload, between the KV and players sections

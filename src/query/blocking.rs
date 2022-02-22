@@ -65,7 +65,7 @@ impl QueryClient {
     ) -> io::Result<Self> {
         let socket = UdpSocket::bind(addr)?;
         socket.set_read_timeout(timeout)?;
-        socket.connect(ip.to_string() + ":" + &port.to_string())?;
+        socket.connect((ip, port))?;
 
         let session_id = std::time::SystemTime::now()
             .duration_since(std::time::UNIX_EPOCH)
@@ -82,7 +82,7 @@ impl QueryClient {
         let handshake = packets::Handshake::new(self.session_id);
         self.socket.send(&handshake)?;
 
-        let mut buf = [0; HANDSHAKE_RESPONSE_SIZE];
+        let mut buf = [0; Token::RESPONSE_SIZE];
         let received = self.socket.recv(&mut buf)?;
 
         Ok(Token::from_payload(
@@ -98,7 +98,7 @@ impl QueryClient {
         let request = packets::BasicStat::new(self.session_id, token.0);
         self.socket.send(&request)?;
 
-        let mut buf = vec![0; BASIC_STAT_RESPONSE_SIZE];
+        let mut buf = vec![0; BasicStat::RESPONSE_SIZE];
         let received = self.socket.recv(&mut buf)?;
 
         BasicStat::from_payload(
@@ -114,7 +114,7 @@ impl QueryClient {
         let request = packets::FullStat::new(self.session_id, token.0);
         self.socket.send(&request)?;
 
-        let mut buf = vec![0; FULL_STAT_RESPONSE_SIZE];
+        let mut buf = vec![0; FullStat::RESPONSE_SIZE];
         let received = self.socket.recv(&mut buf)?;
 
         FullStat::from_payload(
