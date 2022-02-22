@@ -1,1 +1,1 @@
-window.ALL_CRATES = ["minecraft_server_status"];
+window.ALL_CRATES = ["minecraft_server_query"];

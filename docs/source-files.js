@@ -1,3 +1,3 @@
 var N = null;var sourcesIndex = {};
-sourcesIndex["minecraft_server_status"] = {"name":"","dirs":[{"name":"query","files":["async_std.rs","blocking.rs","mod.rs","packets.rs","tokio.rs"]}],"files":["lib.rs"]};
+sourcesIndex["minecraft_server_query"] = {"name":"","files":["async_std.rs","blocking.rs","lib.rs","packets.rs","tokio.rs"]};
 createSourceSidebar();

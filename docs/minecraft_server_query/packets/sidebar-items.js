@@ -1,0 +1,1 @@
+initSidebarItems({"enum":[["PacketType","Single byte constants representing the type of a packet"]],"struct":[["BasicStat","Basic status request packet, 11 bytes long"],["FullStat","Full status request packet, 15 bytes long"],["Handshake","Handshake request packet, 7 bytes long"]]});
