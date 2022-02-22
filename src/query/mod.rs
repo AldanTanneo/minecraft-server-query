@@ -1,3 +1,40 @@
+//! Implementation of the Minecraft server [Query UDP protocol](https://wiki.vg/Query)
+//!
+//! The [`blocking`] and [`async`](self::tokio) [versions](self::async_std) have
+//! the same API, adding a few `async` and `.await` here and there :
+//!
+//! ```rust
+//! # use minecraft_server_status::query::*;
+//! # use std::net::Ipv4Addr;
+//! # use std::time::Duration;
+//! # let ip_to_query = "lotr.g.akliz.net";
+//! use blocking::QueryClient;
+//!
+//! let client = QueryClient::new(ip_to_query)?;
+//! let client2 = QueryClient::new_with_port(ip_to_query, 25565)?;
+//! let client3 = QueryClient::new_with_socket_address(
+//!     ip_to_query,
+//!     25565,
+//!     (Ipv4Addr::UNSPECIFIED, 0),
+//!     Some(Duration::from_secs(3)),
+//! )?;
+//!
+//! let token = client.handshake()?;
+//! let basic_stat = client.basic_stat(token)?;
+//! let full_stat = client.full_stat(token)?;
+//! # Ok::<(), std::io::Error>(())
+//! ```
+//!
+//! The convenience function [`query`](blocking::query) is also available in each module,
+//! and handles the handshake for you:
+//!
+//! ```rust
+//! # use minecraft_server_status::query::*;
+//! # let ip_to_query = "lotr.g.akliz.net";
+//! let full_stat = blocking::query(ip_to_query)?;
+//! # Ok::<(), std::io::Error>(())
+//! ```
+
 #[cfg(feature = "async-std")]
 #[cfg_attr(doc, doc(cfg(feature = "async-std")))]
 pub mod async_std;
@@ -19,10 +56,10 @@ use bytes::Buf;
 #[cfg_attr(doc, doc(cfg(feature = "tokio")))]
 pub use self::tokio::*;
 #[cfg(all(feature = "async-std", not(feature = "tokio")))]
-#[doc(cfg(feature = "async-std"))]
+#[cfg_attr(doc, doc(cfg(feature = "async-std")))]
 pub use async_std::*;
 #[cfg(all(not(feature = "async-std"), not(feature = "tokio")))]
-#[doc(cfg(all(not(feature = "async-std"), not(feature = "tokio"))))]
+#[cfg_attr(doc, doc(cfg(all(not(feature = "async-std"), not(feature = "tokio")))))]
 pub use blocking::*;
 
 /// Default port for a Minecraft server.

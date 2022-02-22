@@ -1,6 +1,6 @@
-//! [`tokio`](::tokio) implementation of the Query protocol.
+//! [`tokio`](https://docs.rs/tokio/*/tokio) implementation of the Query protocol.
 //!
-//! Uses [`tokio::net::UdpSocket`](::tokio::net::UdpSocket) for sending and receiving UDP data
+//! Uses [`tokio::net::UdpSocket`](https://docs.rs/tokio/*/tokio/net/struct.UdpSocket.html) for sending and receiving UDP data
 
 use ::tokio::{
     net::{ToSocketAddrs, UdpSocket},
@@ -10,7 +10,7 @@ use std::{io, net::Ipv4Addr, time::Duration};
 
 use super::*;
 
-/// An asynchronous Query client using the [`tokio`](::tokio) networking primitives.
+/// An asynchronous Query client using the [`tokio`](https://docs.rs/tokio/*/tokio) networking primitives.
 #[derive(Debug)]
 pub struct QueryClient {
     socket: UdpSocket,

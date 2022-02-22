@@ -1,6 +1,6 @@
-//! [`async-std`](::async_std) implementation of the Query protocol.
+//! [`async-std`](https://docs.rs/async-std/*/async_std) implementation of the Query protocol.
 //!
-//! Uses [`async_std::net::UdpSocket`](::async_std::net::UdpSocket) for sending and receiving UDP data
+//! Uses [`async_std::net::UdpSocket`](https://docs.rs/async-std/*/async_std/net/struct.UdpSocket.html) for sending and receiving UDP data
 
 use ::async_std::{
     future::timeout,
@@ -10,7 +10,7 @@ use std::{io, net::Ipv4Addr, time::Duration};
 
 use super::*;
 
-/// An asynchronous Query client using the [`async_std`](::async_std) networking primitives.
+/// An asynchronous Query client using the [`async-std`](https://docs.rs/async-std/*/async_std) networking primitives.
 #[derive(Debug)]
 pub struct QueryClient {
     socket: UdpSocket,
