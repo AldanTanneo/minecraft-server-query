@@ -2,6 +2,8 @@
 
 Rust implementation of the Minecraft server [Query UDP protocol](https://wiki.vg/Query)
 
+## [Documentation](https://aldantanneo.github.io/minecraft_server_query)
+
 ## Features
 
 Only the blocking API is included when no features are specified. You can use the `tokio` 
