@@ -2,12 +2,12 @@
 
 Rust implementation of the Minecraft server [Query UDP protocol](https://wiki.vg/Query)
 
-## [Documentation](https://aldantanneo.github.io/minecraft_server_query)
+## [Documentation](https://aldantanneo.github.io/minecraft-server-query)
 
 ## Features
 
 Only the blocking API is included when no features are specified. You can use the `tokio` 
-or `async-std` for an async API using their networking primitives.
+or `async-std` features for an async API using their networking primitives.
 
 ## Examples
 
